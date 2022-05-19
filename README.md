@@ -12,7 +12,7 @@ This only works if you know the password and can still access the data belonging
    
 3. Download this repository's script:
    
-   https://github.com/JesseBusman/FirefoxMetamaskWalletSeedRecovery/blob/main/firefox_metamask_seed_recovery.py
+   https://raw.githubusercontent.com/JesseBusman/FirefoxMetamaskWalletSeedRecovery/main/firefox_metamask_seed_recovery.py
    
    ... and move it into the Firefox folder
 

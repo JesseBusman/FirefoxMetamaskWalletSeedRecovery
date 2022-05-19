@@ -1,29 +1,52 @@
-This only works if you know the password and can still access the data belonging to the Firefox installation that held your wallet.
+# Unfortunately this is not guaranteed to work for you.
+
+This only works if you know the password and can still access the data belonging to the Firefox installation that held your wallet, specifically the .sqlite file of your Metamask browser extension.
 
 # How to use
-1. Have basic knowledge of how to use a terminal/command prompt and how to run python scripts
-2. `pip install python-snappy` (you may need to `sudo` or run console as administrator)
-3. Find your Firefox data folder and `cd` into it
+1. Make sure you have Python 3 and pip installed
+2. Browse to your Firefox data folder (you may need to show hidden files)
 
-   On Windows it's likely to be here: `C:\Users\[USERNAME]\AppData\Roaming\Mozilla\Firefox`
+   On Windows it's likely to be here: `C:\Users\[USERNAME]\AppData\Roaming\Mozilla`
 
-   On Linux it's likely to be here: `/home/[USERNAME]/.mozilla/firefox`
-4. Download and run this repository's script: `python3 firefox_metamask_seed_recovery.py`
+   On Linux it's likely to be here: `/home/[USERNAME]/.mozilla`
+   
+3. Download this repository's script:
+   
+   https://github.com/JesseBusman/FirefoxMetamaskWalletSeedRecovery/blob/main/firefox_metamask_seed_recovery.py
+   
+   ... and move it into the Firefox folder
 
-If successful, something like this will be printed:
+4. Open a terminal, command prompt or powershell in the Firefox folder
+   
+   On Windows: Shift + Right Click on the Firefox folder -> Open command prompt or PowerShell here
 
-```
----------------------------------------
-Probably found a Metamask vault:
+5. Run this command: `pip install python-snappy`
 
-{"data":"m9b27bSJDFv5svrd7r76v/98nnv678b4TG6v8m+k0v998vnFf98nvfd9f==","iv":"8bbsvdG/G453==","salt":"AS6D/faas+8JJSD="}
+6. Run this command: `python3 firefox_metamask_seed_recovery.py`
 
----------------------------------------
-```
+7. If successful, something like this will be displayed:
 
-Copy everything from the `{` up to and including the `}`
+   ```
+   ---------------------------------------
+   Probably found a Metamask vault:
 
-You can now use the Vault Decryptor: https://metamask.github.io/vault-decryptor/
+   {"data":"m9b27bSJDFv5svrd7r76v/98nnv678b4TG6v8m+k0v998vnFf98nvfd9f==","iv":"8bbsvdG/G453==","salt":"AS6D/faas+8JJSD="}
+
+   ---------------------------------------
+   ```
+
+8. Copy everything from the `{` up to and including the `}`. Metmask calls this the 'vault data'
+
+   On Windows: Click and drag to select, then press Enter to copy
+
+9. You can now use the Vault Decryptor: https://metamask.github.io/vault-decryptor/
+
+   It is recommanded to use the Vault Decryptor offline:
+   - On the Vault Decryptor web page, press Ctrl + S and download the page
+   - Disconnect your computer from the internet
+   - Open the locally saved page (`MetaMask Vault Decryptor.html`) and use it to recover your wallet seed
+   - When finished, close the Vault Decryptor browser tab and delete the `MetaMask Vault Decryptor.html` file
+   - You may now reconnect to the internet
 
 Good luck!
 

@@ -3,6 +3,7 @@ import sqlite3
 import snappy
 import io
 import sys
+import glob
 
 
 
@@ -388,7 +389,8 @@ class Reader:
 				obj[key] = value
 			else:
 				if not isinstance(key, (str, int)):
-					raise ParseError("JavaScript object key must be a string or integer")
+					continue
+					# raise ParseError("JavaScript object key must be a string or integer")
 				
 				if isinstance(obj, list):
 					# Ignore object properties on array
@@ -494,7 +496,8 @@ class Reader:
 			
 			tag2, data2 = self.input.read_pair()
 			if tag2 != DataType.STRING:
-				raise ParseError("RegExp type must be followed by string")
+				return False, False
+				#raise ParseError("RegExp type must be followed by string")
 			
 			return True, JSRegExpObj(flags, self.read_string(data2))
 		
@@ -511,7 +514,8 @@ class Reader:
 			try:
 				return False, self.all_objs[data]
 			except IndexError:
-				raise ParseError("Object backreference to non-existing object") from None
+				return False, False
+				#raise ParseError("Object backreference to non-existing object") from None
 		
 		elif tag == DataType.ARRAY_BUFFER_OBJECT:
 			return True, self.read_array_buffer(data)  #XXX: TODO
@@ -552,7 +556,8 @@ class Reader:
 			return False, self.read_typed_array(tag - DataType.TYPED_ARRAY_V1_MIN, data)
 		
 		else:
-			raise ParseError("Unsupported type")
+			return False, False
+			#raise ParseError("Unsupported type")
 
 
 
@@ -574,18 +579,40 @@ def print_vaults(obj):
 			print("\n---------------------------------------\n\n\n")
 		for key in obj:
 			print_vaults(obj[key])
-	elif isinstance(obj, str):
+	if isinstance(obj, str):
 		if ("'data'" in obj or '"data"' in obj) and ("'salt'" in obj or '"salt"' in obj):
 			print("---------------------------------------")
 			print("Probably found a Metamask vault:\n")
 			print(obj)
 			print("\n---------------------------------------\n\n\n")
-conn = sqlite3.connect(sys.argv[1])
-cur = conn.cursor()
-cur.execute("SELECT * FROM object_data")
-rows = cur.fetchall()
-for row in rows:
-	decompressed = snappy.decompress(row[4])
-	reader = Reader(io.BufferedReader(io.BytesIO(decompressed)))
-	content = reader.read()
-	print_vaults(content)
+
+def print_vaults_from_sqlite_file(f):
+	try:
+		with sqlite3.connect(f) as conn:
+			cur = conn.cursor()
+			cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='object_data'")
+			if len(cur.fetchall()) == 0:
+				return
+			cur.execute("SELECT * FROM object_data")
+			rows = cur.fetchall()
+			failures = 0
+			for row in rows:
+				try:
+					decompressed = snappy.decompress(row[4])
+					reader = Reader(io.BufferedReader(io.BytesIO(decompressed)))
+					content = reader.read()
+					print_vaults(content)
+				except:
+					failures += 1
+					pass
+			if failures >= 1:
+				print("Failed to parse "+str(failures)+" rows in "+f)
+	except:
+		print("Sqlite failure for "+f)
+
+if len(sys.argv) >= 2:
+	print_vaults_from_sqlite_file(sys.argv[1])
+else:
+	print("Scanning all .sqlite files in the current folder recursively...")
+	for f in glob.glob('./**/*.sqlite', recursive=True):
+		print_vaults_from_sqlite_file(f)

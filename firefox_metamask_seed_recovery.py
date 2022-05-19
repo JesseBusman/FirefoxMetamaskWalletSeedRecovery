@@ -588,7 +588,7 @@ def print_vaults(obj):
 
 def print_vaults_from_sqlite_file(f):
 	try:
-		with sqlite3.connect(f) as conn:
+		with sqlite3.connect("file:" + f + "?mode=ro&immutable=1", uri=True) as conn:
 			cur = conn.cursor()
 			cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='object_data'")
 			if len(cur.fetchall()) == 0:
@@ -599,16 +599,32 @@ def print_vaults_from_sqlite_file(f):
 			for row in rows:
 				try:
 					decompressed = snappy.decompress(row[4])
-					reader = Reader(io.BufferedReader(io.BytesIO(decompressed)))
-					content = reader.read()
-					print_vaults(content)
+				except AttributeError as ex:
+					failures += 1
+					if "'snappy' has no attribute" in str(ex):
+						print("Failed to use python-snappy. Is it installed?")
+						exit()
+						os._exit(0)
+					continue
 				except:
 					failures += 1
-					pass
+					#print("Snappy decompress failed for row in "+f)
+					continue
+				
+				try:
+					reader = Reader(io.BufferedReader(io.BytesIO(decompressed)))
+					content = reader.read()
+				except:
+					failures += 1
+					continue
+				
+				print_vaults(content)
+				
 			if failures >= 1:
 				print("Failed to parse "+str(failures)+" rows in "+f)
-	except:
-		print("Sqlite failure for "+f)
+	except BaseException as ex:
+		print(ex)
+		print("Failure while reading "+f)
 
 if len(sys.argv) >= 2:
 	print_vaults_from_sqlite_file(sys.argv[1])

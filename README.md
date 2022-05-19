@@ -41,7 +41,7 @@ This only works if you know the password and can still access the data belonging
 
 9. You can now use the Vault Decryptor: https://metamask.github.io/vault-decryptor/
 
-   It is recommanded to use the Vault Decryptor offline:
+   It is recommended to use the Vault Decryptor offline:
    - On the Vault Decryptor web page, press Ctrl + S and download the page
    - Disconnect your computer from the internet
    - Open the locally saved page (`MetaMask Vault Decryptor.html`) and use it to recover your wallet seed

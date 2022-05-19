@@ -1,16 +1,14 @@
-This only works if you know the password and can still access the .sqlite file belonging to the Metamask installation that had your wallet.
+This only works if you know the password and can still access the data belonging to the Firefox installation that held your wallet.
 
 # How to use
 1. Have basic knowledge of how to use a terminal/command prompt and how to run python scripts
-2. `pip install snappy`
-3. `pip install python-snappy`
-4. Find your Metamask extension's data folder. The folder name contains the ID of the Firefox Metamask extension: 9f4870ed-b576-47fa-bbd6-0172425975d4
+2. `pip install python-snappy` (you may need to `sudo` or run console as administrator)
+3. Find your Firefox data folder and `cd` into it
 
-   On Windows it's likely to be in this folder: C:\Users\[USERNAME]\AppData\Roaming\Mozilla\Firefox
+   On Windows it's likely to be here: `C:\Users\[USERNAME]\AppData\Roaming\Mozilla\Firefox`
 
-   On Linux it's likely to be in this folder: /home/[USERNAME]/.mozilla/firefox
-5. Find the .sqlite file inside this folder structure
-6. `python3 firefox_metamask_seed_recovery.py yourmetamaskdata.sqlite`
+   On Linux it's likely to be here: `/home/[USERNAME]/.mozilla/firefox`
+4. Download and run this repository's script: `python3 firefox_metamask_seed_recovery.py`
 
 If successful, something like this will be printed:
 

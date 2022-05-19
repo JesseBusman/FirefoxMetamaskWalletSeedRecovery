@@ -26,7 +26,7 @@ This only works if you can still access the data belonging to the Firefox instal
 
 5. Run this command: `pip install python-snappy`
 
-6. Run this command: `python3 firefox_metamask_seed_recovery.py`
+6. Run this command: `python firefox_metamask_seed_recovery.py`
 
 7. If successful, something like this will be displayed:
 

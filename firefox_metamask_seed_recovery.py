@@ -606,7 +606,7 @@ def print_vaults_from_sqlite_file(f):
 					failures += 1
 					pass
 			if failures >= 1:
-				#print("Failed to parse "+str(failures)+" rows in "+f)
+				print("Failed to parse "+str(failures)+" rows in "+f)
 	except:
 		print("Sqlite failure for "+f)
 

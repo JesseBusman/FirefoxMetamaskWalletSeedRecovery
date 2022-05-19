@@ -1,6 +1,10 @@
-# Unfortunately this is not guaranteed to work for you.
+# Unfortunately this is not guaranteed to work for you
 
-This only works if you know the password and can still access the data belonging to the Firefox installation that held your wallet, specifically the .sqlite file of your Metamask browser extension.
+This only works for specific versions of Firefox and/or Metamask.
+
+This only works if you know the password of your wallet.
+
+This only works if you can still access the data belonging to the Firefox installation that held your wallet, specifically the .sqlite file of your Metamask browser extension.
 
 # How to use
 1. Make sure you have Python 3 and pip installed
@@ -14,7 +18,7 @@ This only works if you know the password and can still access the data belonging
    
    https://raw.githubusercontent.com/JesseBusman/FirefoxMetamaskWalletSeedRecovery/main/firefox_metamask_seed_recovery.py
    
-   ... and move it into the Firefox folder
+   ... and put it in the Firefox folder
 
 4. Open a terminal, command prompt or powershell in the Firefox folder
    
@@ -42,7 +46,7 @@ This only works if you know the password and can still access the data belonging
 9. You can now use the Vault Decryptor: https://metamask.github.io/vault-decryptor/
 
    It is recommended to use the Vault Decryptor offline:
-   - On the Vault Decryptor web page, press Ctrl + S and download the page
+   - On the Vault Decryptor web page, press Ctrl + S to download the page
    - Disconnect your computer from the internet
    - Open the locally saved page (`MetaMask Vault Decryptor.html`) and use it to recover your wallet seed
    - When finished, close the Vault Decryptor browser tab and delete the `MetaMask Vault Decryptor.html` file

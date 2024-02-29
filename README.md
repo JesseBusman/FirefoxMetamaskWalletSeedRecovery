@@ -7,24 +7,23 @@ This only works if you know the password of your wallet.
 This only works if you can still access the data belonging to the Firefox installation that held your wallet, specifically the .sqlite file of your Metamask browser extension.
 
 # How to use
-1. Make sure you have Python 3 and pip installed
-2. Browse to your Firefox data folder (you may need to show hidden files)
+1. Make sure you have Python 3 installed
+2. Install the python packages `python-snappy` and `python-cramjam`
+3. Browse to your Firefox data folder (you may need to show hidden files)
 
    On Windows it's likely to be here: `C:\Users\[USERNAME]\AppData\Roaming\Mozilla`
 
    On Linux it's likely to be here: `/home/[USERNAME]/.mozilla`
    
-3. Download this repository's script:
+4. Download this repository's script:
    
    https://raw.githubusercontent.com/JesseBusman/FirefoxMetamaskWalletSeedRecovery/main/firefox_metamask_seed_recovery.py
    
    ... and put it in the Firefox folder
 
-4. Open a terminal, command prompt or powershell in the Firefox folder
+5. Open a terminal, command prompt or powershell in the Firefox folder
    
    On Windows: Shift + Right Click on the Firefox folder -> Open command prompt or PowerShell here
-
-5. Run this command: `pip install python-snappy`
 
 6. Run this command: `python firefox_metamask_seed_recovery.py`
 
@@ -39,7 +38,7 @@ This only works if you can still access the data belonging to the Firefox instal
    ---------------------------------------
    ```
 
-8. Copy everything from the `{` up to and including the `}`. Metmask calls this the 'vault data'
+8. Copy everything from the `{` up to and including the `}`. Metamask calls this the 'vault data'
 
    On Windows: Click and drag to select, then press Enter to copy
 

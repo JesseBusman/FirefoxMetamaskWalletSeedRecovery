@@ -44,12 +44,22 @@ This only works if you can still access the data belonging to the Firefox instal
 
 9. You can now use the Vault Decryptor: https://metamask.github.io/vault-decryptor/
 
-   It is recommended to use the Vault Decryptor offline:
-   - On the Vault Decryptor web page, press Ctrl + S to download the page
-   - Disconnect your computer from the internet
-   - Open the locally saved page (`MetaMask Vault Decryptor.html`) and use it to recover your wallet seed
-   - When finished, close the Vault Decryptor browser tab and delete the `MetaMask Vault Decryptor.html` file
+   - Download these two files and save them in the same folder:
+     
+     https://raw.githubusercontent.com/MetaMask/vault-decryptor/master/index.html
+
+     https://raw.githubusercontent.com/MetaMask/vault-decryptor/master/bundle.js
+     
+   - Recommended: Disconnect your computer from the internet
+   - Open the `index.html` you downloaded and use it to recover your wallet seed
+   - When finished, close the Vault Decryptor browser tab and delete the `index.html` and `bundle.js` files
    - You may now reconnect to the internet
+
+   If the vault decryptor gives you a 'Problem decoding vault' error, try using an older version of the vault decryptor by downloading these two files instead:
+     
+     https://raw.githubusercontent.com/MetaMask/vault-decryptor/186101b5d7047aabc2d04455bbaa103f9f3c425a/index.html
+     
+     https://raw.githubusercontent.com/MetaMask/vault-decryptor/186101b5d7047aabc2d04455bbaa103f9f3c425a/bundle.js
 
 Good luck!
 

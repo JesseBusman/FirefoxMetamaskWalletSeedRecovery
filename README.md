@@ -1,10 +1,10 @@
 # Unfortunately this is not guaranteed to work for you
 
-This only works for specific versions of Firefox and/or Metamask.
+This may not work for every version of Firefox and/or Metamask.
 
 This only works if you know the password of your wallet.
 
-This only works if you can still access the data belonging to the Firefox installation that held your wallet, specifically the .sqlite file of your Metamask browser extension.
+This only works if you can still have the data folder of the Firefox installation that held your wallet.
 
 # How to use
 1. Make sure you have Python 3 installed
